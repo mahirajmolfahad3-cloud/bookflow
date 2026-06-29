@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   Tailwind v4 Design Tokens
+   @theme generates utility classes: bg-primary, text-foreground,
+   border-border, etc. automatically from --color-* variables.
+───────────────────────────────────────────────────────────── */
+@theme {
+  /* Light mode colors */
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(224 71.4% 4.1%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(224 71.4% 4.1%);
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(224 71.4% 4.1%);
+  --color-primary: hsl(262.1 83.3% 57.8%);
+  --color-primary-foreground: hsl(210 20% 98%);
+  --color-secondary: hsl(220 14.3% 95.9%);
+  --color-secondary-foreground: hsl(220.9 39.3% 11%);
+  --color-muted: hsl(220 14.3% 95.9%);
+  --color-muted-foreground: hsl(220 8.9% 46.1%);
+  --color-accent: hsl(220 14.3% 95.9%);
+  --color-accent-foreground: hsl(220.9 39.3% 11%);
+  --color-destructive: hsl(0 84.2% 60.2%);
+  --color-destructive-foreground: hsl(210 20% 98%);
+  --color-border: hsl(220 13% 91%);
+  --color-input: hsl(220 13% 91%);
+  --color-ring: hsl(262.1 83.3% 57.8%);
+
+  /* Border radius scale */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+
+  /* Font */
+  --font-sans: Inter, system-ui, sans-serif;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Dark Mode overrides  (class="dark" on <html>)
+   @theme values can be overridden via CSS custom properties
+   at a higher specificity scope.
+───────────────────────────────────────────────────────────── */
+.dark {
+  --color-background: hsl(224 71.4% 4.1%);
+  --color-foreground: hsl(210 20% 98%);
+  --color-card: hsl(224 71.4% 6%);
+  --color-card-foreground: hsl(210 20% 98%);
+  --color-popover: hsl(224 71.4% 6%);
+  --color-popover-foreground: hsl(210 20% 98%);
+  --color-primary: hsl(263.4 70% 50.4%);
+  --color-primary-foreground: hsl(210 20% 98%);
+  --color-secondary: hsl(215 27.9% 16.9%);
+  --color-secondary-foreground: hsl(210 20% 98%);
+  --color-muted: hsl(215 27.9% 16.9%);
+  --color-muted-foreground: hsl(217.9 10.6% 64.9%);
+  --color-accent: hsl(215 27.9% 16.9%);
+  --color-accent-foreground: hsl(210 20% 98%);
+  --color-destructive: hsl(0 62.8% 30.6%);
+  --color-destructive-foreground: hsl(210 20% 98%);
+  --color-border: hsl(215 27.9% 16.9%);
+  --color-input: hsl(215 27.9% 16.9%);
+  --color-ring: hsl(263.4 70% 50.4%);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Base Resets
+───────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-color: var(--color-border);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: Inter, system-ui, sans-serif;
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Custom utility classes (Tailwind v4 @utility directive)
+───────────────────────────────────────────────────────────── */
+@utility gradient-primary {
+  background: linear-gradient(135deg, hsl(262 83% 58%) 0%, hsl(290 70% 55%) 100%);
+}
+
+@utility gradient-hero {
+  background: linear-gradient(
+    135deg,
+    hsl(262 83% 10%) 0%,
+    hsl(224 71% 4%) 60%,
+    hsl(290 40% 8%) 100%
+  );
+}
+
+@utility text-gradient {
+  background: linear-gradient(135deg, hsl(262 83% 68%) 0%, hsl(300 70% 65%) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@utility glass {
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Keyframes
+───────────────────────────────────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes accordion-down {
+  from { height: 0; }
+  to   { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to   { height: 0; }
+}
+
+.animate-fade-in         { animation: fade-in 0.3s ease-out; }
+.animate-slide-in-right  { animation: slide-in-right 0.3s ease-out; }
+.animate-accordion-down  { animation: accordion-down 0.2s ease-out; }
+.animate-accordion-up    { animation: accordion-up 0.2s ease-out; }
