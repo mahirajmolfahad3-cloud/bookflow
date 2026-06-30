@@ -32,11 +32,31 @@ export default function LoginPage() {
 
   const onSubmit = async ({ email, password }: FormData) => {
     setError("");
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
     if (error) {
       setError(error.message);
       return;
     }
+
+    if (data.user) {
+      const { data: siteData, error: siteError } = await supabase
+        .from("user_sites")
+        .select("site")
+        .eq("id", data.user.id)
+        .single();
+
+      if (siteError || siteData.site !== "A") {
+        await supabase.auth.signOut();
+        setError("This account does not belong to this website.");
+        return;
+      }
+    }
+
     router.push("/dashboard");
     router.refresh();
   };

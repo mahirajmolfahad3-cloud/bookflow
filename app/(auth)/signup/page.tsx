@@ -57,6 +57,12 @@ export default function SignupPage() {
         email,
         role,
       });
+
+      await supabase.from("user_sites").insert({
+        id: data.user.id,
+        site: "A",
+      });
+
       toast.success("Account created! Welcome to BookFlow.");
       router.push("/dashboard");
       router.refresh();
